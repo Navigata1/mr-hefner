@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mr Hefner × Hermes — Unfettered Power</title>
+  <style>
+    :root {
+      --bg: #07080b;
+      --bg-2: #0d1017;
+      --panel: rgba(255,255,255,.045);
+      --panel-2: rgba(255,255,255,.075);
+      --line: rgba(255,255,255,.1);
+      --line-soft: rgba(255,255,255,.06);
+      --text: #f7f8f8;
+      --muted: #a6adbb;
+      --dim: #6f7787;
+      --violet: #7c72ff;
+      --blue: #18a0fb;
+      --cyan: #46e5ff;
+      --green: #30d158;
+      --gold: #ffd166;
+      --red: #ff5b4f;
+      --shadow: 0 24px 80px rgba(0,0,0,.42);
+      --radius: 24px;
+      --mono: "SF Mono", "Cascadia Code", "Menlo", "Consolas", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(124,114,255,.28), transparent 34rem),
+        radial-gradient(circle at 75% 10%, rgba(70,229,255,.18), transparent 28rem),
+        radial-gradient(circle at 85% 80%, rgba(255,209,102,.09), transparent 25rem),
+        linear-gradient(180deg, #05060a 0%, var(--bg) 45%, #030406 100%);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; opacity: .38; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .deck { position: relative; z-index: 1; }
+
+    header {
+      position: fixed; z-index: 10; left: 50%; transform: translateX(-50%); top: 16px;
+      width: min(1120px, calc(100vw - 28px));
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      padding: 10px 12px 10px 16px;
+      background: rgba(8,9,12,.72); backdrop-filter: blur(18px);
+      border: 1px solid var(--line-soft); border-radius: 999px;
+      box-shadow: 0 12px 42px rgba(0,0,0,.28);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: -.03em; }
+    .mark {
+      width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+      background: conic-gradient(from 200deg, var(--violet), var(--cyan), var(--green), var(--violet));
+      box-shadow: 0 0 0 4px rgba(124,114,255,.12), 0 0 40px rgba(124,114,255,.32);
+    }
+    .mark::after { content: "H"; color: #05060a; font-weight: 900; font-size: 14px; }
+    nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 560;
+      padding: 8px 10px; border-radius: 999px; transition: .2s ease;
+    }
+    nav a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+
+    section.slide {
+      min-height: 100vh; padding: 116px max(22px, 5vw) 64px; display: grid; place-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.045);
+    }
+    .wrap { width: min(1160px, 100%); }
+    .hero { text-align: center; padding-top: 24px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; color: #dbe3ff;
+      font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid rgba(124,114,255,.35); background: rgba(124,114,255,.09);
+      border-radius: 999px; padding: 8px 12px; margin-bottom: 20px;
+    }
+    .pulse { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 18px var(--green); }
+    h1, h2, h3 { margin: 0; letter-spacing: -.045em; line-height: .96; }
+    h1 { font-size: clamp(56px, 10vw, 136px); font-weight: 760; word-spacing: .06em; }
+    h2 { font-size: clamp(42px, 7vw, 92px); font-weight: 730; max-width: 980px; word-spacing: .03em; }
+    h3 { font-size: clamp(23px, 3vw, 38px); font-weight: 690; letter-spacing: -.035em; line-height: 1.08; }
+    p { color: var(--muted); font-size: clamp(17px, 2vw, 21px); line-height: 1.65; margin: 0; }
+    .lead { max-width: 840px; margin: 24px auto 0; color: #c5ccda; }
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, #cdd5ff 34%, #69e7ff 68%, #fff3c4);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .cta-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .btn {
+      border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--text);
+      padding: 12px 16px; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 650;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08); transition: .2s ease;
+    }
+    .btn.primary { background: linear-gradient(135deg, var(--violet), #5751d7); border-color: rgba(255,255,255,.18); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.24); }
+
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .card {
+      position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.08);
+      padding: 24px;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: -1px; pointer-events: none; opacity: .8;
+      background: radial-gradient(circle at top left, rgba(124,114,255,.18), transparent 16rem);
+    }
+    .card > * { position: relative; z-index: 1; }
+    .kicker { font-family: var(--mono); font-size: 12px; color: var(--cyan); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 12px; }
+    .card p { font-size: 15.5px; line-height: 1.6; margin-top: 12px; color: #bac2d1; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .chip { font-family: var(--mono); font-size: 11px; color: #d8dcff; padding: 7px 9px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.045); }
+
+    .matrix { margin-top: 34px; }
+    .runtime {
+      min-height: 218px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .runtime .icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1); }
+    .flow {
+      display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 12px; margin-top: 38px;
+    }
+    .node { padding: 22px; border-radius: 22px; border: 1px solid var(--line); background: rgba(255,255,255,.045); min-height: 170px; }
+    .arrow { color: var(--cyan); font-size: 30px; opacity: .8; }
+    .code {
+      font-family: var(--mono); font-size: 13px; line-height: 1.65; color: #d9e1ff;
+      background: #05070b; border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 18px; overflow: auto;
+      box-shadow: inset 0 0 30px rgba(124,114,255,.08);
+    }
+    .command-line { display: flex; align-items: center; gap: 10px; color: #aeb7c8; }
+    .command-line strong { color: var(--green); }
+    .bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; margin-top: 18px; }
+    .bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--violet), var(--cyan)); }
+
+    .usecase { display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; }
+    .num { font-family: var(--mono); color: var(--dim); font-size: 13px; margin-top: 8px; }
+    .big-number { font-size: 64px; line-height: 1; font-weight: 780; letter-spacing: -.08em; color: #fff; }
+
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 24px; align-items: center; }
+    .terminal-window { border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #030406; box-shadow: var(--shadow); }
+    .traffic { height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-bottom: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.04); }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot.r { background: #ff5f56; } .dot.y { background: #ffbd2e; } .dot.g { background: #27c93f; }
+    .terminal-body { padding: 20px; font-family: var(--mono); font-size: 13px; line-height: 1.75; color: #c9d2e6; }
+    .terminal-body .prompt { color: var(--green); }
+    .terminal-body .muted { color: #687184; }
+    .terminal-body .accent { color: var(--cyan); }
+
+    .footer-note { margin-top: 26px; color: var(--dim); font-size: 13px; font-family: var(--mono); }
+    .progress {
+      position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 20; width: min(460px, calc(100vw - 36px)); height: 6px;
+      border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; border: 1px solid rgba(255,255,255,.05);
+    }
+    .progress span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--violet), var(--cyan), var(--gold)); transition: width .12s linear; }
+
+    @media (max-width: 900px) {
+      header { position: sticky; transform: none; left: auto; top: 0; width: 100%; border-radius: 0; }
+      nav { display: none; }
+      section.slide { padding-top: 78px; }
+      .grid.two, .grid.three, .grid.five, .split, .flow { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); text-align: center; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <header>
+    <div class="brand"><span class="mark"></span><span>Mr Hefner × Hermes</span></div>
+    <nav>
+      <a href="#power">Power</a><a href="#stack">Stack</a><a href="#runtime">Runtime</a><a href="#usecases">Use cases</a><a href="#demo">Demo</a><a href="#principles">Principles</a>
+    </nav>
+  </header>
+
+  <main class="deck">
+    <section class="slide hero" id="power">
+      <div class="wrap">
+        <div class="eyebrow"><span class="pulse"></span>Hermes is live. The human upgrade is installed.</div>
+        <h1><span class="gradient-text">Mr Hefner</span><br/>now has a command layer.</h1>
+        <p class="lead">This is the clean version: Hermes is not “another chatbot.” It is the connective tissue between models, credentials, code tools, deploy tools, autonomous sandboxes, and real work. Hugh now has a system that can think, remember, execute, verify, and ship.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#stack">See the connected stack</a>
+          <a class="btn" href="#usecases">Steal five practical use cases</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="stack">
+      <div class="wrap">
+        <div class="eyebrow">Connected capability map</div>
+        <h2>Every tool gets sharper when Hermes can route work between them.</h2>
+        <div class="grid three matrix">
+          <article class="card runtime"><div><div class="icon">🧠</div><h3>Model brain</h3><p>OpenAI, OpenRouter, and Gemini create a flexible reasoning layer: fast models for quick answers, deep models for architecture, alternate models for review and second opinions.</p></div><div class="chip-row"><span class="chip">OpenAI</span><span class="chip">OpenRouter</span><span class="chip">Gemini</span></div></article>
+          <article class="card runtime"><div><div class="icon">🔐</div><h3>Secure keys</h3><p>1Password CLI lets the system retrieve secrets without pasting credentials into chats, repos, or random terminals. Power without sloppy key hygiene.</p></div><div class="chip-row"><span class="chip">1Password CLI</span><span class="chip">secret hygiene</span></div></article>
+          <article class="card runtime"><div><div class="icon">🚀</div><h3>Ship pipeline</h3><p>GitHub CLI and Vercel CLI turn ideas into repos, commits, previews, production deployments, rollback paths, and visible proof.</p></div><div class="chip-row"><span class="chip">gh</span><span class="chip">vercel</span><span class="chip">CI/CD</span></div></article>
+          <article class="card runtime"><div><div class="icon">🛠️</div><h3>Agent execution</h3><p>Agent Zero can work in a sandboxed computer-agent lane while Hermes stays the orchestrator: define the goal, monitor the run, verify outputs.</p></div><div class="chip-row"><span class="chip">Agent Zero</span><span class="chip">sandbox</span></div></article>
+          <article class="card runtime"><div><div class="icon">🧩</div><h3>IDE surface</h3><p>AntiGravity is the agentic IDE/design/code surface: the place for visual refactors, app structure, code inspection, and “show me the thing” work.</p></div><div class="chip-row"><span class="chip">AntiGravity</span><span class="chip">IDE</span></div></article>
+          <article class="card runtime"><div><div class="icon">⚡</div><h3>Hermes layer</h3><p>Hermes ties it together with memory, skills, model routing, tools, scheduled jobs, gateway chat access, and repeatable workflows.</p></div><div class="chip-row"><span class="chip">memory</span><span class="chip">skills</span><span class="chip">cron</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="runtime">
+      <div class="wrap">
+        <div class="eyebrow">Runtime source of truth</div>
+        <h2>Don’t force every branch into one runtime. Route work to the place it naturally wins.</h2>
+        <div class="flow">
+          <div class="node"><div class="kicker">01 / ask</div><h3>Human intent</h3><p>“Build the deck, push the repo, deploy it, and make it persuasive.” Hermes converts a messy human objective into ordered executable work.</p></div>
+          <div class="arrow">→</div>
+          <div class="node"><div class="kicker">02 / orchestrate</div><h3>Hermes decides</h3><p>Use files for build, GitHub CLI for repo, Vercel CLI for deploy, browser/terminal for verification, memory/skills for continuity.</p></div>
+          <div class="arrow">→</div>
+          <div class="node"><div class="kicker">03 / execute</div><h3>Specialized runtimes</h3><p>AntiGravity for IDE/design, Agent Zero for autonomous sandboxing, GitHub/Vercel for shipping, model providers for the right level of reasoning.</p></div>
+        </div>
+        <div class="footer-note">Principle: Hermes is the nervous system. The other runtimes are specialized limbs.</div>
+      </div>
+    </section>
+
+    <section class="slide" id="usecases">
+      <div class="wrap">
+        <div class="eyebrow">Five useful ways Hugh can use this immediately</div>
+        <h2>Not toy demos. Real leverage across software, work, and family balance.</h2>
+        <div class="grid two matrix">
+          <article class="card usecase"><div class="num"><div class="big-number">1</div></div><div><h3>Software engineering copilot with deployment authority</h3><p>Turn feature ideas into GitHub issues, implementation plans, branches, commits, PRs, Vercel previews, and production releases. Hermes can also ask a second model to review the diff before shipping.</p><div class="chip-row"><span class="chip">GitHub</span><span class="chip">Vercel</span><span class="chip">code review</span></div></div></article>
+          <article class="card usecase"><div class="num"><div class="big-number">2</div></div><div><h3>Context-preserving work memory</h3><p>Capture project decisions, customer requirements, architecture constraints, and recurring workflows as memory and skills, so Hugh does not have to re-explain his life to the machine every day.</p><div class="chip-row"><span class="chip">Hermes memory</span><span class="chip">skills</span><span class="chip">continuity</span></div></div></article>
+          <article class="card usecase"><div class="num"><div class="big-number">3</div></div><div><h3>Family/work balance command center</h3><p>Use scheduled check-ins for calendar pressure, deadlines, household tasks, school/family commitments, and “what matters today?” summaries. Not more noise — fewer dropped balls.</p><div class="chip-row"><span class="chip">cron</span><span class="chip">priorities</span><span class="chip">life ops</span></div></div></article>
+          <article class="card usecase"><div class="num"><div class="big-number">4</div></div><div><h3>Secure operations assistant</h3><p>With 1Password CLI wired in, Hermes can help rotate credentials, configure env vars, audit deployment settings, and avoid the classic developer sin: secrets scattered everywhere.</p><div class="chip-row"><span class="chip">1Password</span><span class="chip">env vars</span><span class="chip">ops hygiene</span></div></div></article>
+          <article class="card usecase"><div class="num"><div class="big-number">5</div></div><div><h3>Autonomous sandbox experiments</h3><p>When the work is uncertain, send Agent Zero or an IDE agent to explore in a sandbox: try approaches, inspect results, report back with evidence, and only then merge the good path.</p><div class="chip-row"><span class="chip">Agent Zero</span><span class="chip">AntiGravity</span><span class="chip">spikes</span></div></div></article>
+          <article class="card usecase"><div class="num"><div class="big-number">+</div></div><div><h3>The meta-use case: becoming dangerous in a good way</h3><p>Hugh can now operate like a small team: architect, implementer, reviewer, devops engineer, researcher, secretary, and memory keeper — coordinated by one command layer.</p><div class="chip-row"><span class="chip">human amplification</span><span class="chip">not replacement</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="demo">
+      <div class="wrap split">
+        <div>
+          <div class="eyebrow">What this Hermes run just did</div>
+          <h2>This deck is the demonstration.</h2>
+          <p class="lead" style="margin-left:0">The proof is not a diagram. The proof is that one natural-language request became a designed artifact, a GitHub repo, and a Vercel deployment path.</p>
+          <div class="grid two" style="margin-top:24px">
+            <div class="card"><div class="kicker">Input</div><p>Messy voice-style goal: show Hugh what Hermes can do, make it beautiful, publish it.</p></div>
+            <div class="card"><div class="kicker">Output</div><p>A self-contained slide deck with runtime map, use cases, repo, and deployment.</p></div>
+          </div>
+        </div>
+        <div class="terminal-window">
+          <div class="traffic"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+          <div class="terminal-body">
+            <div><span class="prompt">hermes</span> parse human intent</div>
+            <div class="muted">→ identify skills: Hermes, GitHub, design systems</div>
+            <div><span class="prompt">hermes</span> create static deck</div>
+            <div class="muted">→ generate HTML/CSS/JS, package, Vercel config</div>
+            <div><span class="prompt">gh</span> create repo mr-hefner</div>
+            <div class="muted">→ commit + push source of truth</div>
+            <div><span class="prompt">vercel</span> deploy --prod</div>
+            <div class="accent">→ public proof, shareable link, no hand waving</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="principles">
+      <div class="wrap">
+        <div class="eyebrow">Operating principles for Mr Hefner</div>
+        <h2>Use the power cleanly. Let Hermes be aggressive internally and careful externally.</h2>
+        <div class="grid three matrix">
+          <article class="card"><div class="kicker">Principle 01</div><h3>Describe the outcome, not just the tool</h3><p>Bad prompt: “Use Vercel.” Good prompt: “Create a production-ready landing page, push it to GitHub, deploy it on Vercel, verify the live URL.”</p><div class="bar"><span style="width:92%"></span></div></article>
+          <article class="card"><div class="kicker">Principle 02</div><h3>Make the agent verify</h3><p>Tell Hermes what “done” means: tests passing, link live, repo pushed, screenshot checked, no secrets exposed, deployment logs clean.</p><div class="bar"><span style="width:88%"></span></div></article>
+          <article class="card"><div class="kicker">Principle 03</div><h3>Save repeatable wins as skills</h3><p>When a workflow works, capture it. That is how Hermes becomes less generic and more like Hugh’s actual operational brain.</p><div class="bar"><span style="width:95%"></span></div></article>
+        </div>
+        <div class="card" style="margin-top:18px; text-align:center; padding:34px">
+          <div class="kicker">Closing line</div>
+          <h3 style="font-size:clamp(30px,4vw,54px)">This is not “AI help.” This is a personal operating system with hands.</h3>
+          <p style="max-width:760px;margin:16px auto 0">Mr Hefner now has enough connected infrastructure to move from idea → plan → code → secret management → deployment → review → memory. The next unlock is discipline: clear goals, verified outputs, and reusable skills.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <script>
+    const progress = document.getElementById('progressBar');
+    function updateProgress(){
+      const scrollTop = window.scrollY;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${Math.min(100, Math.max(0, (scrollTop / height) * 100))}%`;
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
+</body>
+</html>

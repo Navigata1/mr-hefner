@@ -1,0 +1,14 @@
+{
+  "name": "mr-hefner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A self-contained Hermes power demonstration deck for Mr Hefner.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
